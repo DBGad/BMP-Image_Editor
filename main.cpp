@@ -1,3 +1,12 @@
+// FCAI – OOP Programming – 2023 - Assignment 1
+// Program Name:				main.cpp
+// Last Modification Date:	    10/10/2023
+// Author1 and ID and Group:	Gad Amr - 20220095 - N/A
+// Author2 and ID and Group:	Bavly Safwat - 20220081 - N/A
+// Author3 and ID and Group:	Osama Mohamed - 20220055 - N/A
+// Teaching Assistant:		    N/A
+// Purpose:                     Assignment 1 Image Processor
+
 
 #include <iostream>
 #include <fstream>
@@ -34,7 +43,7 @@ int main()
     }
     doSomethingForImage();
     saveImage();
-    //return 0;
+    return 0;
 }
 
 //_________________________________________
