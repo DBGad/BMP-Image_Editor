@@ -105,7 +105,19 @@ void InvertFilter() {
     //code will be here
 }
 bool MergeFilter(){
-  //code will be here  
+    int t = 3;
+    while (loadImage(image2)){
+        NumberOFimages--;
+        cout << "You Have "+ to_string(--t)+" Chance to Add Imags\n";
+        if (t == 0)
+            return false;
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            image[i][j] = (image[i][j] + image2[i][j])/2;
+        }
+    }
+    return true;
 }
 bool FlipImage(){
     //code will be here
@@ -114,5 +126,23 @@ bool RotateImage(){
     //code will be here
 }
 bool Darken_and_Lighten_Image(){
-    //code will be here
+    cout << "Do you want to (d)arken or (l)ighten? 0 to cancel\n";
+    char c ;cin>>c;
+    if (c =='0')
+        return false;
+    if (toupper(c)=='D') {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                image[i][j] /= 2;
+            }
+        }
+    }
+    else {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                image[i][j] +=(255-image[i][j])/ 2;
+            }
+        }
+    }
+    return true;
 }
