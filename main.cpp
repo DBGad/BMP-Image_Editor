@@ -99,7 +99,15 @@ void doSomethingForImage() {
 }
 //_________________________________________
 void BlackandWhiteFilter() {
-    //code will be here
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+
+            if (image[i][j] > 127)
+                image[i][j] = 255;
+            else
+                image[i][j] = 0;
+        }
+    }
 }
 void InvertFilter() {
     //code will be here
@@ -120,7 +128,26 @@ bool MergeFilter(){
     return true;
 }
 bool FlipImage(){
-    //code will be here
+    cout << "Flip (h)orizontally or (v)ertically  ? 0 to cancel\n";
+    char c ;cin>>c;
+    if (c=='0')
+        return false;
+    if (toupper(c) == 'H'){
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j< SIZE/2; j++) {
+                swap(  image[i][j] ,image[i][SIZE-1-j]);
+
+            }
+        }
+    }
+    else{
+        for (int i = 0; i < SIZE/2; i++) {
+            for (int j = 0; j< SIZE; j++) {
+                swap(  image[i][j] ,image[SIZE-1-i][j]);
+            }
+        }
+    }
+    return true;
 }
 bool RotateImage(){
     //code will be here
