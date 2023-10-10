@@ -5,7 +5,7 @@
 // Author2 and ID and Group:	Bavly Safwat - 20220081 - N/A
 // Author3 and ID and Group:	Osama Mohamed - 20220055 - N/A
 // Teaching Assistant:		    N/A
-// Purpose:                     Assignment 1 Image Processor
+// Purpose:                     Assignment 1 Image Processor (First 6 Filters)
 
 
 #include <iostream>
@@ -30,6 +30,16 @@ bool MergeFilter();
 bool FlipImage();
 bool RotateImage();
 bool Darken_and_Lighten_Image();
+bool DetectImageEdges();
+bool EnlargeImage();
+bool ShrinkImage();
+bool MirrorImage();
+bool ShuffleImage();
+bool BlurImage();
+bool CropImage();
+bool SkewImageRight();
+bool SkewImageUp();
+
 void Menu();
 
 //_________________________________________
@@ -42,29 +52,43 @@ int main()
         NumberOFimages--;
     }
     doSomethingForImage();
-    saveImage();
+
     return 0;
 }
 
 //_________________________________________
+void systempause(){
+    cout << "\nEnter any Key to continue ";
+    system("pause>0");
+}
 void Menu()
 {
-    cout << "1 Black & White Filter\n"
-            "2 Invert Filter\n"
-            "3 Merge Filter \n"
-            "4 Flip Image\n"
-            "5 Rotate Image\n"
-            "6 Darken and Lighten Image\n"
-            "7 Shrink Image\n";
+    cout << "01 Black & White Filter\n"
+            "02 Invert Filter\n"
+            "03 Merge Filter \n"
+            "04 Flip Image\n"
+            "05 Rotate Image\n"
+            "06 Darken and Lighten Image\n"
+            "07 Detect Image Edges \n"
+            "08 Enlarge Image\n"
+            "09 Shrink Image\n"
+            "10 Mirror 1/2 Image\n"
+            "11 Shuffle Image\n"
+            "12 Blur Image\n"
+            "13 Crop Image\n"
+            "14 Skew Image Right  \n"
+            "15 Skew Image Up \n"
+            "s -Save image \n"
+            "0  Exit \n";
 }
 bool loadImage(unsigned char Simage[][SIZE])
 {
     string imageFileName;
     // Get gray scale image file name
-    cout << "Please enter file name of the image Number " + to_string(NumberOFimages++) + " to process : \n";
+    cout << "Please enter file name of the image Number " + to_string(NumberOFimages++) + " to process : without (.exp) \n";
     cin >> imageFileName;
+
     imageFileName = "\\imgs\\" + imageFileName + ".bmp";
-    //strcat (imageFileName, ".bmp");
     // Add to it .bmp extension and load image
     char cwd[PATH_MAX];
     return readGSBMP(strcat(getcwd(cwd, sizeof(cwd)), imageFileName.c_str()), Simage);
@@ -85,40 +109,104 @@ void saveImage()
 //_________________________________________
 void doSomethingForImage()
 {
-    int choose = 1;
+    string choose = "1";
     bool flag = true;
-    while (choose != 0)
+    while (choose != "0")
     {
         cout << "Please select a filter to apply or 0 to exit:\n";
         Menu();
         cin >> choose;
-        if (choose == 1)
+        if (choose == "1")
         {
             BlackandWhiteFilter();
             flag = true;
         }
-        if (choose == 2)
+        else if (choose == "2")
         {
             InvertFilter();
             flag = true;
         }
-        if (choose == 3)
+        else if (choose == "3")
         {
             flag = MergeFilter();
 
         }
-        if (choose == 4)
+        else if (choose == "4")
         {
             flag = FlipImage();
         }
-        if (choose == 5)
+        else if (choose == "5")
         {
             flag = RotateImage();
         }
-        if (choose == 6)
+        else if (choose == "6")
         {
             flag = Darken_and_Lighten_Image();
         }
+        else if (choose == "7")
+        {
+            DetectImageEdges();
+            flag = false;
+        }
+       else if (choose == "8")
+        {
+            EnlargeImage();
+            flag = false;
+        }
+        else if (choose == "9")
+        {
+             ShrinkImage();
+            flag = false;
+        }
+        else if (choose == "10")
+        {
+            MirrorImage();
+            flag = false;
+
+        }
+        else if (choose == "11")
+        {
+            ShuffleImage();
+            flag = false;
+        }
+        else if (choose == "12")
+        {
+            BlurImage();
+            flag = false;
+        }
+        else if (choose == "13")
+        {
+            CropImage();
+            flag = false;
+        }
+        else if (choose == "14")
+        {
+            SkewImageRight();
+            flag = false;
+        }
+        else if (choose == "15")
+        {
+            SkewImageUp();
+            flag = false;
+        }
+        else if (tolower(choose[0]) == 's')
+        {
+            saveImage();
+            flag = false;
+        }
+        else if (choose == "0")
+        {
+           cout << "\n Thank You ^^\n";
+        flag = false;
+        }
+
+        else
+        {
+          cout << "\tPlease Enter Number in Range or Save Image\n";
+            systempause();
+            flag = false;
+        }
+
         if (flag)
             showGSBMP(image);
     }
@@ -286,4 +374,58 @@ bool Darken_and_Lighten_Image()
         }
     }
     return true;
+}
+bool DetectImageEdges()
+{
+   // code will be Here
+   cout << "\n\tAccess Denied,This feature will be available soon \n";
+    systempause();
+}
+bool EnlargeImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool ShrinkImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool MirrorImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool ShuffleImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool BlurImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool CropImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool SkewImageRight()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool SkewImageUp()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
 }
