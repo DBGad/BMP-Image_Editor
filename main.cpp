@@ -1,11 +1,11 @@
 // FCAI – OOP Programming – 2023 - Assignment 1
 // Program Name:				main.cpp
-// Last Modification Date:	    10/10/2023
+// Last Modification Date:	    16/10/2023
 // Author1 and ID and Group:	Gad Amr - 20220095 - N/A
 // Author2 and ID and Group:	Bavly Safwat - 20220081 - N/A
 // Author3 and ID and Group:	Osama Mohamed - 20220055 - N/A
 // Teaching Assistant:		    N/A
-// Purpose:                     Assignment 1 Image Processor (First 6 Filters)
+// Purpose:                     Assignment 1 Image Processor
 
 
 #include <iostream>
@@ -149,8 +149,7 @@ void doSomethingForImage()
         }
         else if (choose == "8")
         {
-            EnlargeImage();
-            flag = false;
+            flag = EnlargeImage();
         }
         else if (choose == "9")
         {
@@ -162,8 +161,7 @@ void doSomethingForImage()
         }
         else if (choose == "11")
         {
-            ShuffleImage();
-            flag = false;
+            flag = ShuffleImage();
         }
         else if (choose == "12")
         {
@@ -175,8 +173,7 @@ void doSomethingForImage()
         }
         else if (choose == "14")
         {
-            SkewImageRight();
-            flag = false;
+            flag = SkewImageRight();
         }
         else if (choose == "15")
         {
@@ -387,9 +384,39 @@ bool DetectImageEdges()
 }
 bool EnlargeImage()
 {
-    // code will be Here
-    cout << "\n\tAccess Denied,This feature will be available soon \n";
-    systempause();
+    cout << "Which quarter to enlarge 1, 2, 3 or 4?: ";
+    int Quarter; cin >> Quarter;
+    unsigned char image2[SIZE][SIZE];
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
+            // Take a copy from image
+            image2[i][j] = image[i][j];
+        }
+    }
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            // Make every pixel englare in 4 pixels according to quarter you choose
+            if (Quarter == 1)
+            {
+                image[i][j] = image2[i/2][j/2];
+            }
+            else if (Quarter == 2)
+            {
+                image[i][j] = image2[i/2][j/2+(SIZE/2)];
+            }
+            else if (Quarter == 3)
+            {
+                image[i][j] = image2[i/2 +(SIZE/2)][j/2];
+            }
+            else if (Quarter == 4)
+            {
+                image[i][j] = image2[i/2+(SIZE/2)][j/2+(SIZE/2)];
+            }
+        }
+    }
+    return true;
 }
 bool ShrinkImage()
 {
@@ -451,12 +478,103 @@ bool MirrorImage()
             }
         }
     }
+    return true;
 }
 bool ShuffleImage()
 {
-    // code will be Here
-    cout << "\n\tAccess Denied,This feature will be available soon \n";
-    systempause();
+    cout << "New order of quarters ?: ";
+    int order[4];
+    for (int i = 0; i < 4; ++i)
+    {
+        // Take a new order of quarters
+        cin >> order[i];
+    }
+    unsigned char image2[SIZE][SIZE];
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE ; ++j)
+        {
+            //Take copy from image
+            image2[i][j] = image[i][j];
+        }
+    }
+    // Change first quarter according to his new order
+    for (int i = 0; i < SIZE/2; ++i)
+    {
+        for (int j = 0; j < SIZE/2; ++j)
+        {
+            if(order[0] == 2)
+            {
+                image[i][j] = image2[i][j+(SIZE/2)];
+            }
+            else if(order[0] == 3)
+            {
+                image[i][j] = image2[i+(SIZE/2)][j];
+            }
+            else if(order[0] == 4)
+            {
+                image[i][j] = image2[i+(SIZE/2)][j+(SIZE/2)];
+            }
+        }
+    }
+    // Change second quarter according to his new order
+    for (int i = 0; i < SIZE/2; ++i)
+    {
+        for (int j = SIZE/2 ; j < SIZE; ++j)
+        {
+            if(order[1] == 1)
+            {
+                image[i][j] = image2[i][j-(SIZE/2)];
+            }
+            else if(order[1] == 3)
+            {
+                image[i][j] = image2[i+(SIZE/2)][j-(SIZE/2)];
+            }
+            else if(order[1] == 4)
+            {
+                image[i][j] = image2[i+(SIZE/2)][j];
+            }
+        }
+    }
+    // Change third quarter according to his new order
+    for (int i = SIZE/2; i < SIZE; ++i)
+    {
+        for (int j = 0 ; j < SIZE/2; ++j)
+        {
+            if(order[2] == 1)
+            {
+                image[i][j] = image2[i-(SIZE/2)][j];
+            }
+            else if(order[2] == 2)
+            {
+                image[i][j] = image2[i-(SIZE/2)][j+(SIZE/2)];
+            }
+            else if(order[2] == 4)
+            {
+                image[i][j] = image2[i][j+(SIZE/2)];
+            }
+        }
+    }
+    // Change fourth quarter according to his new order
+    for (int i = SIZE/2; i < SIZE; ++i)
+    {
+        for (int j = SIZE/2 ; j < SIZE; ++j)
+        {
+            if(order[3] == 1)
+            {
+                image[i][j] = image2[i-(SIZE/2)][j-(SIZE/2)];
+            }
+            else if(order[3] == 2)
+            {
+                image[i][j] = image2[i-(SIZE/2)][j];
+            }
+            else if(order[3] == 3)
+            {
+                image[i][j] = image2[i][j-(SIZE/2)];
+            }
+        }
+    }
+    return true;
 }
 bool BlurImage()
 {
@@ -490,6 +608,7 @@ bool BlurImage()
             }
         }
     }
+    return true;
 }
 bool CropImage()
 {
@@ -514,9 +633,39 @@ bool CropImage()
 }
 bool SkewImageRight()
 {
-    // code will be Here
-    cout << "\n\tAccess Denied,This feature will be available soon \n";
-    systempause();
+    cout << "Please enter degree to skew Right : \n";
+    double rad ;cin>>rad; // Take Degree
+    rad = 90 - rad;
+    rad = ( rad * 22 ) / ( 180 * 7 ) ; // Convert From Degree to Radiant
+    int c = 256 / (1+ ( 1/ tan(rad) ))  ; // Make New Base To Shrink
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image2[i][j] =image[i][j];    // Take a copy from current image to Process
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image2[i][(j*c)/SIZE] =image2[i][j]; // shrink Image With New Base
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if ((i<=SIZE && j >= c)  )
+                image2[i][j] = 255 ;     // Make another Part of copied image White
+
+            image[i][j] = 255;          // Make our image white to receive the new skewed image
+        }
+    }
+    double step = SIZE - c;             // The number of steps required to Skew
+    double mov = step / SIZE;           // The number of Move required to subtract from steps in each loop to Skew Rightward
+    for ( int i = 0 ; i < SIZE ; i++ ){
+        for ( int j = 0 ; j < c ; j++ ){
+            image[i][j+(int)step] = image2[i][j] ;
+        }
+        step -= mov ;
+    }
+
+    return true;
 }
 bool SkewImageUp()
 {
