@@ -147,7 +147,7 @@ void doSomethingForImage()
         {
             flag = DetectImageEdges();
         }
-        else if (choose == "8")
+       else if (choose == "8")
         {
             EnlargeImage();
             flag = false;
@@ -229,17 +229,19 @@ void InvertFilter()
     {
         for (int j = 0; j< SIZE; j++)
         {
-            // Every black pixel turned to white
+            
+          // Every white pixel turned to black
             if (image[i][j] == 255)
             {
                 image[i][j] = 0;
             }
-                // Every white pixel turned to black
+            // Every black pixel turned to white
             else if (image[i][j] == 0)
             {
                 image[i][j] = 255;
             }
-                // Every gray pixel is turned to opposite level of brightness (255 – pixel value)
+
+            // Every gray pixel is turned to opposite level of brightness (255 – pixel value)
             else
             {
                 image[i][j] = 255 - image[i][j];
@@ -352,6 +354,7 @@ bool Darken_and_Lighten_Image()
             {
                 // Merge it with a black image
                 image[i][j]/= 2;
+
             }
         }
     }
@@ -514,6 +517,160 @@ bool SkewImageRight()
 // code will be Here
     cout << "\n\tAccess Denied,This feature will be available soon \n";
     systempause();
+}
+bool SkewImageUp()
+{
+    cout << "Please enter degree to skew Up : \n";
+    double rad ;cin>>rad;                   // Take Degree
+    rad = ( rad * 22 ) / ( 180 * 7 ) ;      // Convert From Degree to Radiant
+    int c = 256 / (1 +  tan(rad)) ;      // Make New Base To Shrink
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            image2[i][j] =image[i][j];      // Take a copy from current image to Process
+        }
+    }
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            image2[(i*c)/SIZE][j] =image2[i][j]; // shrink Image With New Base
+        }
+    }
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            if ((i >= c && j <= SIZE))
+            {
+                image2[i][j] = 255;    // Make another Part of copied image White
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < SIZE; i++)
+        {
+            for (int j = 0; j < SIZE; j++)
+            {
+                // Merge it with a white image
+                image[i][j] +=(255-image[i][j])/ 2;
+            }
+            image[i][j] = 255;         // Make our image white to receive the new skewed image
+        }
+    }
+    double step = SIZE - c;             // The number of steps required to Skew
+    double mov = step / SIZE;           // The number of Move required to subtract from steps in each loop to Skew upward
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            image[j + (int) step][i] = image2[j][i]; //Make Our Image Skewed Up
+        }
+        step -= mov;
+    }
+
+    return true;
+}
+bool DetectImageEdges()
+{
+   // code will be Here
+   cout << "\n\tAccess Denied,This feature will be available soon \n";
+    systempause();
+}
+bool EnlargeImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool ShrinkImage()
+{
+    cout << "Shrink to 1/2, 1/3 or 1/4 ? [1,2,3] 0 to cancel\n";
+    int c ;cin>>c;
+    if (c == 0){
+        return false;
+    }
+    c++;
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            image[i/c][j/c] = image[i][j]; // Shrink Image With New Base
+        }
+    }
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            if ((i<(SIZE/c) && j >= (SIZE/c)) || (i>=(SIZE/c) && j < (SIZE/c)) ||(i>=(SIZE/c) && j >= (SIZE/c))  )
+            {
+                image[i][j] = 255 ;  // Make another Part of Current image White
+            }
+        }
+    }
+    return true;
+
+}
+bool MirrorImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool ShuffleImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool BlurImage()
+{
+// Initialize two direction arrayes for x and y to get all neighbors
+    int dx[] = {1, 0, -1, 0, -1, -1, 1, 1};
+    int dy[] = {0, -1, 0, 1, -1, 1, -1, 1};
+    for (int t = 0; t < 4; ++t)
+    {
+        for (int i = 0; i < SIZE ; ++i)
+        {
+            for (int j = 0; j < SIZE ; ++j)
+            {
+                int Average = 0, cnt = 0;
+                for (int k = 0; k < 8; ++k)
+                {
+                    // Find all its neighbors
+                    int nx = i+dx[k], ny = j+dy[k];
+                    // Check if it is valid (in range) or not
+                    if(nx >= 0 && ny >= 0 && nx < SIZE && ny < SIZE)
+                    {
+                        cnt++;
+                        Average+=image[nx][ny];
+                    }
+                }
+                Average+=image[i][j];
+                cnt++;
+                // Get the average of each cell with its neighbors
+                Average/=cnt;
+                // Assign it to the cell
+                image[i][j] = Average;
+            }
+        }
+    }
+}
+bool CropImage()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
+}
+bool SkewImageRight()
+{
+// code will be Here
+    cout << "\n\tAccess Denied,This feature will be available soon \n";
+systempause();
 }
 bool SkewImageUp()
 {
