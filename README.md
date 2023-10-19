@@ -100,16 +100,19 @@ The library consists of two files bmplib.cpp and bmplib.h.
 
 
 ### **Important Note**
-1. **add** two folders thier names is "tmp" and "imgs" without "" 
-2. **then** check your cwd (current Working directory) 
+1. add two folders thier names is "tmp" and "imgs" without "" 
+	. put Your Images in "imgs" Folder
+	. Make Folder "tmp" empty
 
-* if Your cwd in "cmake-build-debug"  
+2. check your cwd (current Working directory) 
+
+ if Your cwd in "cmake-build-debug"  
 
     - put the folders in "cmake-build-debug" file
 
 
-* if  Your cwd is not in "cmake-build-debug"
+ if  Your cwd is not in "cmake-build-debug"
 
     - put the folders next to "main.cpp" file
 
-
+ 
